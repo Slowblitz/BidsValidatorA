@@ -5,5 +5,5 @@ Usage :
 
 
 ```
-$Python /resources/BidsValidatorA.py [ path to Folder ]
+$Python /resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
 ```
