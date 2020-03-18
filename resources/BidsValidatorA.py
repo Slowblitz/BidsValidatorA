@@ -44,12 +44,12 @@ def verify_name(names):
     else :
         print("ERROR :  Data folder not found. Please check this name : " +  names[0])
 
-    if "sub-" in str(names[2]):
-        print("Folder Name found .")
+    if "sub-" or "Sub-"in str(names[2]):
+        print("Folder Name found : " + names[2])
     else :
         print("ERROR :  Folder name does not contain sub-.... .Please check this name : " +  names[2] )
 
-    if re.search("^\d{6}_\d{3}_([[a-zA-Z]{1})_([a-zA-Z]*)_([a-zA-Z]*)", names[3]):
+    if re.search("^\d{6}_\d{3}_([a-zA-Z]{1})_([a-zA-Z]*)_([a-zA-Z]*)", names[3]):
         print ("Date format ok ")
     else :
         print("ERROR : Folder name does not follow the rules : \n /Date[yymmdd] _ numéro de session (expérience) _ espèce [m, o, r, s] _ UFID animal(User friendly ID) _ commentaire . ")
@@ -59,11 +59,11 @@ def verify_name(names):
     else :
         print("ERROR : Folder Sources not found .")
 
-    if "META-DATA" or "META-DATA" in names :
+    if "META-DATA" in names :
          print ( "Folder META-DATA Found ")
     else :
          print("WARNING : Folder META-DATA not found .")
-    if "Row-data" or "row-data" in names :
+    if "Row-data"  in names :
          print ( "Folder Row data Found ")
     else :
          print("WARNING : Folder Row data not found .")
