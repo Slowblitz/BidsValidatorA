@@ -106,7 +106,7 @@ if __name__ == '__main__':
         "-v",
         "--verbose",
         action="store_true",
-        help="increase output verbosit
+        help="increase output verbosity")
     parser.add_argument("path", help="Path to your folder ")
     args = parser.parse_args()
 
