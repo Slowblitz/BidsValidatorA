@@ -9,6 +9,15 @@ import argparse
 
 
 def path_hierarchy(path):
+    """[make a json tree structure of the folder given in parameter]
+    
+    Arguments:
+        path {[type]} -- [Path to the folder]
+    
+    Returns:
+        [json] -- [Tree of the folder]
+    """
+   
     hierarchy = {
         'type': 'directory',
         'name': os.path.basename(path),
@@ -29,7 +38,15 @@ def path_hierarchy(path):
 
 
 def get_name_in_dir(list_dict, names):
+"""[Get all the name of directories in the Dict recusively]
 
+Arguments:
+    list_dict {[Dict]} -- [Json to dict ]
+    names {[list]} -- [Names of directories founds]
+
+Returns:
+    [list] -- [Names of directories founds]
+"""
     for my_dict in list_dict:
 
         if my_dict['type'] == 'directory':
@@ -40,6 +57,11 @@ def get_name_in_dir(list_dict, names):
 
 
 def verify_name(names):
+    """[Check names of folder that verify the rules bids]
+    
+    Arguments:
+        names {[list]} -- [Names founds in the Json structure ]
+    """
 
     if (names[0] == "data" or names[0] == "Data"):
         print("Folder Data found ")
@@ -58,7 +80,7 @@ def verify_name(names):
         print("Date format ok ")
     else:
         print(
-            "ERROR : Folder name does not follow the rules : \n /Date[yymmdd]_"
+            "ERROR : Folder name does not follow the rules : \n /Date[yymmdd] _"
             "numéro de session (expérience) _ espèce [m, o, r, s] _ "
             "UFID animal(User friendly ID) _ commentaire . ")
 
@@ -95,13 +117,13 @@ if __name__ == '__main__':
         except IndexError:
             directory = "."
         print(json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
-
+        
     try:
         directory = args.path
 
     except IndexError:
         directory = "."
-
+        
     dic_data = json.loads(
         json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
 
