@@ -5,6 +5,7 @@ import errno
 import json
 import sys
 import re
+import argparse
 
 
 def path_hierarchy(path):
@@ -49,9 +50,8 @@ def verify_name(names):
     if "sub-" or "Sub-" in str(names[2]):
         print("Folder Name found : " + names[2])
     else:
-        print(
-            "ERROR :  Folder name does not contain sub-."
-            ".Please check this name : " + names[2])
+        print("ERROR :  Folder name does not contain sub-."
+              ".Please check this name : " + names[2])
 
     if re.search("^\d{6}_\d{3}_([a-zA-Z]{1})_([a-zA-Z]*)_([a-zA-Z]*)",
                  names[3]):
@@ -60,8 +60,7 @@ def verify_name(names):
         print(
             "ERROR : Folder name does not follow the rules : \n /Date[yymmdd]_"
             "numéro de session (expérience) _ espèce [m, o, r, s] _ "
-            "UFID animal(User friendly ID) _ commentaire . "
-        )
+            "UFID animal(User friendly ID) _ commentaire . ")
 
     if "source " or "Sources" in names:
         print("Folder Sources Found . ")
@@ -79,16 +78,29 @@ def verify_name(names):
 
 
 if __name__ == '__main__':
-    import json
-    import sys
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="increase output verbosity")
+    parser.add_argument("path", help="Path to your folder ")
+    args = parser.parse_args()
+
+    if args.verbose:
+        try:
+            directory = args.path
+
+        except IndexError:
+            directory = "."
+        print(json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
 
     try:
-        directory = sys.argv[1]
+        directory = args.path
 
     except IndexError:
         directory = "."
-
-    print(json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
 
     dic_data = json.loads(
         json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
