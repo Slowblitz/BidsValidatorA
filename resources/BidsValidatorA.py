@@ -100,13 +100,13 @@ def verify_name(names):
 
 
 if __name__ == '__main__':
-
+    # add argparse for verbose option
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
-        help="increase output verbosity")
+        help="increase output verbosit
     parser.add_argument("path", help="Path to your folder ")
     args = parser.parse_args()
 
