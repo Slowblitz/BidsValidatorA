@@ -1,31 +1,99 @@
-.newsletter {
-padding: 80px 0;
-background: #19beda;
-}
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,,800,900);
 
-.newsletter .content {
-max-width: 650px;
-margin: 0 auto;
-text-align: center;
-position: relative;
-z-index: 2; }
-.newsletter .content h2 {
-color: #243c4f;
-margin-bottom: 40px; }
-.newsletter .content .form-control {
-height: 50px;
-border-color: #ffffff;
-border-radius:0;
-}
-.newsletter .content.form-control:focus {
-box-shadow: none;
-border: 2px solid #243c4f;
-}
 .newsletter .content .btn {
 min-height: 50px; 
 border-radius:0;
 background: #243c4f;
 color: #fff;
 font-weight:600;
+width: 100%;
+}
+.files input {
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    padding: 120px 0px 85px 35%;
+    text-align: center !important;
+    margin: 0;
+    width: 100% !important;
+}
+.files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
+ }
+.files{ position:relative}
+.files:after {  pointer-events: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 50px;
+    right: 0;
+    height: 56px;
+    content: "";
+    background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+    display: block;
+    margin: 0 auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.color input{ background-color:#f1f1f1;}
+.files:before {
+    position: absolute;
+    bottom: 10px;
+    left: 0;  pointer-events: none;
+    width: 100%;
+    right: 0;
+    height: 78px;
+    content: " or drag it here. ";
+    display: block;
+    margin: 0 auto;
+    color: #2ea591;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
 }
 
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: -webkit-linear-gradient(#ebece7, white);
+  background: linear-gradient(#ebece7, white);
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Raleway', sans-serif;
+}
+
+.container {
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+
+.title {
+  font-weight: 800;
+  color: transparent;
+  font-size: 120px;
+  background: url("https://i.pinimg.com/736x/49/b8/44/49b8447614cb0fe0b9b800c7258ef126.jpg") repeat;
+  background-position: 40% 50%;
+  -webkit-background-clip: text;
+  position: relative;
+  text-align: center;
+  line-height: 90px;
+  letter-spacing: -8px;
+}
+
+.subtitle {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 10px;
+}
