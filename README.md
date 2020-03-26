@@ -5,5 +5,5 @@ Usage :
 
 
 ```
-$Python /resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
+$Python resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
 ```
