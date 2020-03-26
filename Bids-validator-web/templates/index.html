@@ -1,0 +1,51 @@
+<!doctype html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<title>Bids-Validator-A</title>
+
+<h1>Bids-Validator-A</h1>
+<form action="/" method="post" enctype="multipart/form-data">
+      	
+<input id="picker" type="file" webkitdirectory multiple />
+<div id="list">
+  Pick a directory.
+</div>
+    
+        <input type="submit" value="Submit" id='submit'>
+    </form>
+   <span id=result>?</span>
+<script type="text/javascript">
+let picker = document.getElementById('picker')
+   var a=null
+picker.addEventListener('change', (event) => {
+  let files = event.target.files
+  let list = document.getElementById('list')
+  list.innerHTML = 'You selected these files:'
+	var arr =[];
+  for (let i = 0; i < files.length; i++) {
+    let file = files[i]
+    
+    list.innerHTML += '<br>' + file.webkitRelativePath
+		arr.push(file.webkitRelativePath)
+   }
+ a = JSON.stringify(arr)
+		list.innerHTML ='Coordinates string: '+a
+    
+
+})
+
+ $(function() {
+    $('#submit').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/_getData', {
+        a:a,
+     
+      }, function(data) {
+        $("#result").text(data.result);
+      });
+      return false;
+    });
+  });
+</script>
