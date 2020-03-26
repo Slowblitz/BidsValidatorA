@@ -98,6 +98,48 @@ def verify_name(names):
     else:
         print("WARNING : Folder Row data not found .")
 
+def _verify_name(names):
+    """[Check names of folder that verify the rules bids]
+    
+    Arguments:
+        names {[list]} -- [Names founds in the Json structure ]
+    """
+    x=list()
+    if (names[0] == "data" or names[0] == "Data"):
+       x.append ("Folder Data found  \n")
+    else:
+       x.append ("ERROR :  Data folder not found. Please check this name : " +
+              names[0]+"\n")
+
+    if "sub-" or "Sub-" in str(names[2]):
+       x.append ("Folder Name found : " + names[2]+"\n")
+    else:
+       x.append ("ERROR :  Folder name does not contain sub-."
+              ".Please check this name : " + names[2]+"\n")
+
+    if re.search("^\d{6}_\d{3}_([a-zA-Z]{1})_([a-zA-Z]*)_([a-zA-Z]*)",
+                 names[3]):
+       x.append("Date format ok \n")
+    else:
+       x.append(
+            "ERROR : Folder name does not follow the rules : \n /Date[yymmdd] _"
+            "numéro de session (expérience) _ espèce [m, o, r, s] _ "
+            "UFID animal(User friendly ID) _ commentaire . \n")
+
+    if "source " or "Sources" in names:
+       x.append("Folder Sources Found . \n")
+    else:
+       x.append("ERROR : Folder Sources not found .\n")
+
+    if "META-DATA" in names:
+       x.append("Folder META-DATA Found ")
+    else:
+       x.append("WARNING : Folder META-DATA not found .\n")
+    if "Row-data" in names:
+       x.append("Folder Row data Found ")
+    else:
+       x.append("WARNING : Folder Row data not found .\n")
+    return x
 
 if __name__ == '__main__':
     # add argparse for verbose option

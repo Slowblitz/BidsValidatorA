@@ -1,12 +1,11 @@
 from flask import Flask, jsonify, render_template, request
 import os
-import logging
-import ast
+
 import BidsValidatorA as BVA
 from collections import OrderedDict
 app = Flask(__name__)
 
-logging.basicConfig(level=logging.DEBUG)
+
 
 
 @app.route('/')
@@ -19,17 +18,22 @@ def end_stu_live_session():
     if request.method == 'POST':
         data = request.json
         length = len(data)
+        out=""
         x = list()
+        l=list()
         for i in range(length):
             if data[i] not in x:
                 x += splitall(data[i].encode('ascii', 'ignore'))
                 print(x)
                 l = del_file(x)
                 l = list(OrderedDict.fromkeys(x))
-        BVA.verify_name(l)
-        print(l)
+        out = BVA._verify_name(l)
+        print(out)
 
-        return jsonify(l)
+        return jsonify({
+         "out" : out,
+        "list" :l
+         })
 
 
 def del_file(Ilist):
