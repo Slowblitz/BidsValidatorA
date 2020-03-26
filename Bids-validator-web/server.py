@@ -39,7 +39,7 @@ def end_stu_live_session():
 def del_file(Ilist):
     length = len(Ilist)
     for i in range(length):
-        if "." in Ilist[i]:
+        if b"." in Ilist[i]:
             Ilist.remove(Ilist[i])
 
 
