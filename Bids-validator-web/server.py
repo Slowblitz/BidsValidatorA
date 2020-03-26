@@ -24,11 +24,11 @@ def end_stu_live_session():
         for i in range(length):
             if data[i] not in x:
                 x += splitall(data[i].encode('ascii', 'ignore'))
-                print(x)
+                #print(x)
                 l = del_file(x)
                 l = list(OrderedDict.fromkeys(x))
         out = BVA._verify_name(l)
-        print(out)
+        #print(out)
 
         return jsonify({
          "out" : out,
