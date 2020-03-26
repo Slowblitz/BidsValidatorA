@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <title>Flask Ajax</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+    <body>
+
+    
+<section class="newsletter">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+    <div class="content">
+        <h2>BIDS-Validator-A</h2>
+    <div class="input-group">
+          <input id="picker" class="form-control" il" type="file" webkitdirectory multiple />
+
+          <span>
+              <button  class="btn" id="demo_btn" >Scan Now</button>
+         </span>
+
+    </div>
+    
+            <div id="data"></div>             
+              <div id="list"></div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+<div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading"><strong>Upload Files</strong> <small>Bootstrap files upload</small></div>
+        <div class="panel-body">
+
+          <!-- Standar Form -->
+          <h4>Select files from your computer</h4>
+          <form action="" method="post" enctype="multipart/form-data" id="js-upload-form">
+            <div class="form-inline">
+              <div class="form-group">
+                <input type="file" name="files[]" id="js-upload-files" multiple>
+              </div>
+              <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
+            </div>
+          </form>
+
+          <!-- Drop Zone -->
+          <h4>Or drag and drop files below</h4>
+          <div class="upload-drop-zone" id="drop-zone">
+            Just drag and drop files here
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              <span class="sr-only">60% Complete</span>
+            </div>
+          </div>
+
+          <!-- Upload Finished -->
+          <div class="js-upload-finished">
+            <h3>Processed files</h3>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
+              <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+
+
+
+
+
+
+
+
+
+
+<script>
+        let picker = document.getElementById('picker')
+            var a=[]
+            picker.addEventListener('change', (event) => {
+              let files = event.target.files
+              let list = document.getElementById('list')
+             // list.innerHTML = 'You selected these files:'
+                var arr =[];
+              for (let i = 0; i < files.length; i++) {
+                let file = files[i]
+                
+               // list.innerHTML += '<br>' + file.webkitRelativePath
+                    arr.push(file.webkitRelativePath)
+               }
+             a = arr
+                   // list.innerHTML ='Coordinates string: '+a
+                
+
+            })
+
+            $(document).ready(function () {
+                $("#demo_btn").on("click", function() {
+                    var js_data = JSON.stringify(a);
+                    $.ajax({                        
+                        url: '/end_stu_live_session',
+                        type : 'post',
+                        contentType: 'application/json',
+                        dataType : 'json',
+                        data : js_data
+                    }).done(function(result) {
+                        console.log(result);
+                        $("#data").html(result);
+                    }).fail(function(jqXHR, textStatus, errorThrown) {
+                        console.log("fail: ",textStatus, errorThrown);
+                    });
+                });
+            });
+        </script>       
+    </body>
+</html>
