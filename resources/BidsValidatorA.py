@@ -17,7 +17,7 @@ def path_hierarchy(path):
     Returns:
         [json] -- [Tree of the folder]
     """
-   
+
     hierarchy = {
         'type': 'directory',
         'name': os.path.basename(path),
@@ -38,15 +38,15 @@ def path_hierarchy(path):
 
 
 def get_name_in_dir(list_dict, names):
-"""[Get all the name of directories in the Dict recusively]
-
-Arguments:
-    list_dict {[Dict]} -- [Json to dict ]
-    names {[list]} -- [Names of directories founds]
-
-Returns:
-    [list] -- [Names of directories founds]
-"""
+    """[Get all the name of directories in the Dict recusively]
+    
+    Arguments:
+        list_dict {[Dict]} -- [Json to dict ]
+        names {[list]} -- [Names of directories founds]
+    Returns:
+        [list] -- [Names of directories founds]
+        
+    """
     for my_dict in list_dict:
 
         if my_dict['type'] == 'directory':
@@ -117,13 +117,13 @@ if __name__ == '__main__':
         except IndexError:
             directory = "."
         print(json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
-        
+
     try:
         directory = args.path
 
     except IndexError:
         directory = "."
-        
+
     dic_data = json.loads(
         json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
 
