@@ -1,51 +1,74 @@
-<!doctype html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
-<script type=text/javascript>
-  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-</script>
-<title>Bids-Validator-A</title>
+<html>
+    <head>
+        <title>Flask Ajax</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+    <body>
 
-<h1>Bids-Validator-A</h1>
-<form action="/" method="post" enctype="multipart/form-data">
-      	
-<input id="picker" type="file" webkitdirectory multiple />
-<div id="list">
-  Pick a directory.
+    
+<section class="newsletter">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+    <div class="content">
+        <h2>BIDS-Validator-A</h2>
+    <div class="input-group">
+          <input id="picker" class="form-control" il" type="file" webkitdirectory multiple />
+          <span>
+              <button  class="btn" id="demo_btn" >Scan Now</button>
+         </span>
+
+    </div>
+    
+            <div id="data"></div>             
+              <div id="list"></div>
 </div>
-    
-        <input type="submit" value="Submit" id='submit'>
-    </form>
-   <span id=result>?</span>
-<script type="text/javascript">
-let picker = document.getElementById('picker')
-   var a=null
-picker.addEventListener('change', (event) => {
-  let files = event.target.files
-  let list = document.getElementById('list')
-  list.innerHTML = 'You selected these files:'
-	var arr =[];
-  for (let i = 0; i < files.length; i++) {
-    let file = files[i]
-    
-    list.innerHTML += '<br>' + file.webkitRelativePath
-		arr.push(file.webkitRelativePath)
-   }
- a = JSON.stringify(arr)
-		list.innerHTML ='Coordinates string: '+a
-    
+</div>
+</div>
+</section>
 
-})
 
- $(function() {
-    $('#submit').bind('click', function() {
-      $.getJSON($SCRIPT_ROOT + '/_getData', {
-        a:a,
-     
-      }, function(data) {
-        $("#result").text(data.result);
-      });
-      return false;
-    });
-  });
-</script>
+<script>
+        let picker = document.getElementById('picker')
+            var a=[]
+            picker.addEventListener('change', (event) => {
+              let files = event.target.files
+              let list = document.getElementById('list')
+             // list.innerHTML = 'You selected these files:'
+                var arr =[];
+              for (let i = 0; i < files.length; i++) {
+                let file = files[i]
+                
+               // list.innerHTML += '<br>' + file.webkitRelativePath
+                    arr.push(file.webkitRelativePath)
+               }
+             a = arr
+                   // list.innerHTML ='Coordinates string: '+a
+                
+
+            })
+
+            $(document).ready(function () {
+                $("#demo_btn").on("click", function() {
+                    var js_data = JSON.stringify(a);
+                    $.ajax({                        
+                        url: '/end_stu_live_session',
+                        type : 'post',
+                        contentType: 'application/json',
+                        dataType : 'json',
+                        data : js_data
+                    }).done(function(result) {
+                        console.log(result);
+                        $("#data").html(result);
+                    }).fail(function(jqXHR, textStatus, errorThrown) {
+                        console.log("fail: ",textStatus, errorThrown);
+                    });
+                });
+            });
+        </script>       
+    </body>
+</html>
