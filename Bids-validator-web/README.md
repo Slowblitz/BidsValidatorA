@@ -1,7 +1,7 @@
 Install python :
 
 ```
-$apt-get install flask
+$apt-get install python
 ```
 
 Install flask :
