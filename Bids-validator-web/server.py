@@ -23,12 +23,12 @@ def end_stu_live_session():
         l=list()
         for i in range(length):
             if data[i] not in x:
-                x += splitall(data[i].encode('ascii', 'ignore'))
-                #print(x)
+                x += splitall(data[i])
+                print(x)
                 l = del_file(x)
                 l = list(OrderedDict.fromkeys(x))
         out = BVA._verify_name(l)
-        #print(out)
+        print(out)
 
         return jsonify({
          "out" : out,
@@ -39,7 +39,7 @@ def end_stu_live_session():
 def del_file(Ilist):
     length = len(Ilist)
     for i in range(length):
-        if b"." in Ilist[i]:
+        if "." in Ilist[i]:
             Ilist.remove(Ilist[i])
 
 
