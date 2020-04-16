@@ -64,20 +64,20 @@ def verify_name(names):
     """
 
     if (names[0] == "data" or names[0] == "Data"):
-        print("Folder Data found ")
+        print("SUCCESS : Folder Data found ")
     else:
         print("ERROR :  Data folder not found. Please check this name : " +
               names[0])
 
     if "sub-" or "Sub-" in str(names[2]):
-        print("Folder Name found : " + names[2])
+        print("SUCCESS : Folder Name found : " + names[2])
     else:
         print("ERROR :  Folder name does not contain sub-."
               ".Please check this name : " + names[2])
 
     if re.search("^\d{6}_\d{3}_([a-zA-Z]{1})_([a-zA-Z]*)_([a-zA-Z]*)",
                  names[3]):
-        print("Date format ok ")
+        print("SUCCESS : Date format ok ")
     else:
         print(
             "ERROR : Folder name does not follow the rules : \n /Date[yymmdd] _"
@@ -85,19 +85,62 @@ def verify_name(names):
             "UFID animal(User friendly ID) _ commentaire . ")
 
     if "source " or "Sources" in names:
-        print("Folder Sources Found . ")
+        print("SUCCESS : Folder Sources Found . ")
     else:
         print("ERROR : Folder Sources not found .")
 
     if "META-DATA" in names:
-        print("Folder META-DATA Found ")
+        print("SUCCESS : Folder META-DATA Found ")
     else:
         print("WARNING : Folder META-DATA not found .")
     if "Row-data" in names:
-        print("Folder Row data Found ")
+        print("SUCCESS : Folder Row data Found ")
     else:
         print("WARNING : Folder Row data not found .")
 
+def _verify_name(names):
+    """[Check names of folder that verify the rules bids]
+    
+    Arguments:
+        names {[list]} -- [Names founds in the Json structure ]
+    """
+    x=list()
+    if (names[0] == "data" or names[0] == "Data"):
+       x.append ("SUCCESS : Folder Data found  \n")
+    else:
+       x.append ("ERROR :  Data folder not found. Please check this name : " +
+              names[0]+"\n")
+
+    if "sub-" or "Sub-" in str(names[2]):
+       x.append ("SUCCESS : Folder Name found : " + names[2]+"\n")
+    else:
+       x.append ("ERROR :  Folder name does not contain sub-."
+              ".Please check this name : " + names[2]+"\n")
+
+    if re.search("^\d{6}_\d{3}_([a-zA-Z]{1})_([a-zA-Z]*)_([a-zA-Z]*)",
+                 names[3]):
+       x.append("SUCCESS : Date format ok \n")
+    else:
+       x.append(
+            "ERROR : Folder name does not follow the rules : \n /Date[yymmdd] _"
+            "numéro de session (expérience) _ espèce [m, o, r, s] _ "
+            "UFID animal(User friendly ID) _ commentaire . \n"
+            "Your path is : "+names[3])
+
+    if "source " or "Sources" in names:
+       x.append("SUCCESS : Folder Sources Found . \n")
+    else:
+       x.append("ERROR : Folder Sources not found .\n")
+
+    if "META-DATA" in names:
+       x.append("SUCCESS : Folder META-DATA Found ")
+    else:
+       x.append("WARNING : Folder META-DATA not found .\n")
+    if "Row-data" in names:
+       x.append("SUCCESS : Folder Row data Found ")
+    else:
+       x.append("WARNING : Folder Row data not found .\n")
+    return x
 
 if __name__ == '__main__':
     # add argparse for verbose option

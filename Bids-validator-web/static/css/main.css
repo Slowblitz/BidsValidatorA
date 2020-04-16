@@ -1,0 +1,122 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,,800,900);
+ .btn {
+	min-height: 50px;
+	border-radius: 0;
+	background: #3c6281;
+	color: #fff;
+	font-weight: 600;
+	margin: 3% 5%;
+	padding: 8px 16px;
+	width: 90%;
+	border-radius: 15px;
+}
+.title {
+	font-weight: 800;
+	color: transparent;
+	font-size: 120px;
+	background: url("https://i.pinimg.com/736x/49/b8/44/49b8447614cb0fe0b9b800c7258ef126.jpg") repeat;
+	background-position: 40% 50%;
+	-webkit-background-clip: text;
+	position: relative;
+	text-align: center;
+	line-height: 90px;
+	letter-spacing: -8px;
+}
+.subtitle {
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 10px;
+}
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+	outline: none;
+}
+.drop {
+	width: 90%;
+	height: 220px;
+	border: 3px dashed rgb(126, 175, 214);
+	border-radius: 15px;
+	overflow: hidden;
+	text-align: center;
+	background: transparent;
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.drop .cont {
+	width: 500px;
+	height: 170px;
+	color: rgb(107, 155, 206);
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.drop .cont i {
+	font-size: 40px;
+	color: #787e85;
+	position: relative;
+}
+.drop .cont .tit {
+	font-size: 30px;
+	text-transform: uppercase;
+	font-weight: 900;
+}
+.drop .cont .desc {
+	color: #787e85;
+	font-size: 18px;
+}
+.drop .cont .browse {
+	margin: 10px 25%;
+	color: white;
+	padding: 8px 16px;
+	border-radius: 4px;
+	background: #58a5c9;
+}
+.drop input {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	background: red;
+	opacity: 0;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+#list {
+	width: 100%;
+	text-align: left;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.dashed_upload {
+	height: 200px;
+}

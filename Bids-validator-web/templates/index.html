@@ -1,0 +1,137 @@
+<html>
+
+<head>
+	<title>BIDS VALIDATOR A</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+	<div>
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<div class="title">BIDS-VALIDATOR-A</div>
+				<div class="subtitle">Smart tool for open-sciences</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<div class="dashed_upload">
+					<div class="wrapper">
+						<div class="drop">
+							<div class="cont"> <i class="fa fa-cloud-upload"></i>
+								<div class="tit">Drag & Drop</div>
+								<div class="desc">or</div>
+								<div class="browse">click here to browse</div>
+							</div>
+							<input id="picker" class="file-upload" type="file" webkitdirectory multiple />
+						</div>
+					</div>
+				</div> <span>
+          <button class="btn" id="demo_btn">Scan Now</button>
+        </span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<div>
+					<div id="data" class="alert alert-primary" role="alert" style="display: none;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<div id="list"></div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	let picker = document.getElementById('picker')
+	  var a = []
+	  picker.addEventListener('change', (event) => {
+	    let files = event.target.files
+	    let list = document.getElementById('data')
+	    // list.innerHTML = 'You selected these files:'
+	    var arr = [];
+	    for (let i = 0; i < files.length; i++) {
+	      let file = files[i]
+	      //list.innerHTML += '<br>' + file.webkitRelativePath
+	      arr.push(file.webkitRelativePath)
+	    }
+	    a = arr
+	    list.style.display = "block";
+	    list.innerHTML = 'Files selected: ' + '<br>'
+	    for (let i = 0; i < a.length; i++) {
+	      list.innerHTML += a[i] + '<br>'
+	    }
+	  })
+	
+	  $(document).ready(function () {
+	    $("#demo_btn").on("click", function () {
+	      var js_data = JSON.stringify(a);
+	      $.ajax({
+	        url: '/end_stu_live_session',
+	        type: 'post',
+	        contentType: 'application/json',
+	        dataType: 'json',
+	        data: js_data
+	      }).done(function (result) {
+	        const myObjStr = JSON.stringify(result);
+	        let out = JSON.parse(myObjStr)
+	        let list = document.getElementById('list')
+	        let data = document.getElementById('data')
+	
+	        for (let i = 0; i < out.list.length; i++) {
+	          data.style.display = "block";
+	          data.innerHTML += '</br> Path selected : ' + out.list[i] + "/"
+	
+	        }
+	        for (let i = 0; i < out.out.length; i++) {
+	          let file = out.out[i]
+	          if (file.indexOf("WARNING") > -1) {
+	
+	            list.innerHTML += '<div class="alert alert-warning" role="alert">' + file
+	          } if (file.indexOf("ERROR") > -1) {
+	
+	            list.innerHTML += '<div class="alert alert-danger" role="alert">' + file
+	          } if (file.indexOf("SUCCESS") > -1) {
+	
+	            list.innerHTML += '<div class="alert alert-success" role="alert">' + file
+	          }
+	
+	        }
+	
+	        console.log(out.list);
+	        //$("#data").html(out.list);
+	      }).fail(function (jqXHR, textStatus, errorThrown) {
+	        console.log("fail: ", textStatus, errorThrown);
+	      });
+	    });
+	  });
+</script>
+<script>
+	$(document).ready(function () {
+	    var mouseX, mouseY;
+	    var ww = $(window).width();
+	    var wh = $(window).height();
+	    var traX, traY;
+	    $(document).mousemove(function (e) {
+	      mouseX = e.pageX;
+	      mouseY = e.pageY;
+	      traX = ((4 * mouseX) / 570) + 40;
+	      traY = ((4 * mouseY) / 570) + 50;
+	      // console.log(traX);
+	      $(".title").css({ "background-position": traX + "%" + traY + "%" });
+	    });
+	  });
+</script>
+</body>
+
+</html>
