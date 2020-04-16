@@ -1,5 +1,5 @@
 # BidsValidatorA
-
+V1
 
 Usage :
 
@@ -7,3 +7,4 @@ Usage :
 ```
 $Python resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
 ```
+
