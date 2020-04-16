@@ -24,17 +24,27 @@ def end_stu_live_session():
         for i in range(length):
             if data[i] not in x:
                 x += splitall(data[i])
-                print(x)
-                l = del_file(x)
-                l = list(OrderedDict.fromkeys(x))
+                #print(x)
+                l = del_file(x)#delete files
+                l = list(OrderedDict.fromkeys(x)) #remove doublon
         out = BVA._verify_name(l)
-        print(out)
+        date=BVA.is_date(l)
+        data=BVA.is_data(l)
+        subject=BVA.is_sub(l)
+        source=BVA.is_source(l)
+        ap=[date, source,subject,data]
+        if (all(ap)):
+            print("à quand cet apero en visio du NIT?!")
+       #print(out)
 
         return jsonify({
          "out" : out,
-        "list" :l
+         "date" : date,
+         "data" : data,
+         "subject" : subject,
+         "source" : source,
+         "list" :l
          })
-
 
 def del_file(Ilist):
     length = len(Ilist)

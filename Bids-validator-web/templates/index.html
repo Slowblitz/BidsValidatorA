@@ -2,13 +2,10 @@
 
 <head>
 	<title>BIDS VALIDATOR A</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 
@@ -30,11 +27,11 @@
 								<div class="desc">or</div>
 								<div class="browse">click here to browse</div>
 							</div>
-							<input id="picker" class="file-upload" type="file" webkitdirectory multiple />
+							<input  id="picker" class="file-upload" type="file" webkitdirectory multiple />
 						</div>
 					</div>
 				</div> <span>
-          <button class="btn" id="demo_btn">Scan Now</button>
+          <button type="reset" class="btn" id="demo_btn">Scan Now</button>
         </span>
 			</div>
 		</div>
@@ -47,11 +44,18 @@
 		</div>
 		<div class="row">
 			<div class="col-md-10 offset-md-1">
-				<div id="list"></div>
+				<div class="card" id="list"></div>
 			</div>
 		</div>
+		
 	</div>
+	
+<footer></footer>
 </body>
+
+
+
+
 <script>
 	let picker = document.getElementById('picker')
 	  var a = []
@@ -66,11 +70,12 @@
 	      arr.push(file.webkitRelativePath)
 	    }
 	    a = arr
+		/*
 	    list.style.display = "block";
 	    list.innerHTML = 'Files selected: ' + '<br>'
 	    for (let i = 0; i < a.length; i++) {
 	      list.innerHTML += a[i] + '<br>'
-	    }
+	    }*/
 	  })
 	
 	  $(document).ready(function () {
@@ -87,34 +92,67 @@
 	        let out = JSON.parse(myObjStr)
 	        let list = document.getElementById('list')
 	        let data = document.getElementById('data')
-	
+			list.innerHTML="" 
+			/*
 	        for (let i = 0; i < out.list.length; i++) {
 	          data.style.display = "block";
 	          data.innerHTML += '</br> Path selected : ' + out.list[i] + "/"
 	
-	        }
-	        for (let i = 0; i < out.out.length; i++) {
-	          let file = out.out[i]
-	          if (file.indexOf("WARNING") > -1) {
-	
-	            list.innerHTML += '<div class="alert alert-warning" role="alert">' + file
-	          } if (file.indexOf("ERROR") > -1) {
-	
-	            list.innerHTML += '<div class="alert alert-danger" role="alert">' + file
-	          } if (file.indexOf("SUCCESS") > -1) {
-	
-	            list.innerHTML += '<div class="alert alert-success" role="alert">' + file
+	        }*/
+	       
+	          if (out.data== false) {
+	            list.innerHTML += '<div class="card"><div class="card-header bg-danger text-white">1 error found at fisrt folder level.  </div><div class="card-body"> <h4 class="em-header clearfix"><strong class="em-header pull-left">Error 1 type [Data folder error ] at : '+out.list[0]+'</strong></h4><br>the general folder structure does not resemble a BIDS dataset. Have you chosen the right folder (with <i><b>"data"</i></b>)?Or does not respect the naming convention for a subject directory, which is <i><b>"data"</i></b>. Check for structural/naming issues.</div></div>'
 	          }
-	
-	        }
-	
-	        console.log(out.list);
+			  if (out.subject== false) {
+				list.innerHTML += '<div class="card"><div class="card-header bg-danger text-white">1 error found at Subject folder level.  </div><div class="card-body"> <h4 class="em-header clearfix"><strong class="em-header pull-left">Error 2 type [Subject folder error] at : '+out.list[2]+'</strong></h4><br><b><i>"'+out.list[2]+'"</b></i> does not respect the naming convention for a subject directory, which is <i><b>"sub-GUID" </i></b><br> Check for structural/naming issues.</div></div>'
+	  			} 
+			  if (out.date== false) {
+				list.innerHTML += '<div class="card"><div class="card-header bg-danger text-white">1 error found at Date folder level.  </div><div class="card-body"> <h4 class="em-header clearfix"><strong class="em-header pull-left">Error 3 type [Date folder error] at : '+out.list[3]+' </strong></h4><br><b><i>"'+out.list[3]+'"</b></i> does not respect the naming convention for a session directory, which is <i><b>" [yymmdd] _ numéro de session (expérience) _ espèce [m, o, r, s] _ UFID animal(User friendly ID) _ commentaire libre [anesth/awake, nom de manip, méthode d’imagerie etc.]"</i></b><br>Check for structural/naming issues.</div></div>'
+  				} 
+			  if (out.source== false) {
+	            list.innerHTML += '<div class="card"><div class="card-header bg-danger text-white">1 error found at Source folder level.  </div><div class="card-body"> <h4 class="em-header clearfix"><strong class="em-header pull-left">Error 4 type [Source folder error] at : '+out.list[4]+' </strong></h4><br><b><i>"'+out.list[4]+'"</b></i> does not respect the naming convention for a source directory, which is <i><b>"source" </i></b><br> Check for structural/naming issues.</div></div>'
+				
+	          }
+			  
+
+			  if (out.source== false || out.date== false || out.data== false ||out.subject== false) {
+	            list.innerHTML += '<div class="card"> <h5 class="card-header bg-primary text-white"> <a id="collapsed d-block" class="collapsed d-block" data-toggle="collapse" href="#collapse-collapsed" aria-expanded="true" aria-controls="collapse-collapsed" id="heading-collapsed"><i class="fa fa-chevron-down pull-right"></i> Get some details </a></h5><div id="collapse-collapsed" class="collapse" aria-labelledby="heading-collapsed">  <div id="help" class="card-body">  </div>  </div></div>	     '
+				let help = document.getElementById('help')
+				for (let i = 0; i < out.list.length; i++) {
+	         
+					help.innerHTML += '</br> folder found: ' + out.list[i] + "/"
+					
+
+		 	  	}  list.innerHTML +='</div></div>'
+				   
+				}
+				
+				document.getElementById("collapsed d-block").addEventListener("click", myFunction);
+					function myFunction() {
+							console.log("clo")
+							$('html, body').animate({
+								scrollTop: $('footer').offset().top
+								//scrollTop: $('#your-id').offset().top
+								//scrollTop: $('.your-class').offset().top
+								}, 'fast');
+							
+							}
+			
+			/*  
+			console.log(out.list);
+			console.log("date: "+out.date);
+			console.log("data: "+out.data);
+			console.log("sub: "+out.subject);
+			console.log("source: "+out.source);
+			*/
 	        //$("#data").html(out.list);
 	      }).fail(function (jqXHR, textStatus, errorThrown) {
 	        console.log("fail: ", textStatus, errorThrown);
 	      });
 	    });
 	  });
+
+
 </script>
 <script>
 	$(document).ready(function () {
