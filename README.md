@@ -2,10 +2,10 @@
 # BidsValidatorA
 
 # Table of Contents
-1. [ General usage](#General-usage)
-2. [Specific usage](#Specific-usage)
-3. [Testing usage](#Testing-usage )
-4. [Details](#Details)
+1. [ General usage](#General-usage-)
+2. [Specific usage](#Specific-usage-)
+3. [Testing usage](#Testing-usage-)
+4. [Details](#Details-)
 
 
 ## General usage :
