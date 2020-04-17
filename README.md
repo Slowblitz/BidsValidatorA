@@ -1,7 +1,7 @@
 
 # BidsValidatorA
 V2
-
+## General usage :
 ```
 usage: BidsValidatorA.py [-h] [-v] path
 
@@ -13,7 +13,8 @@ optional arguments:
   -v, --verbose  increase output verbosity
 
 ```
-Usage :
+
+## Specific usage :
 
 ```
 $Python resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
@@ -22,12 +23,14 @@ OR verbose usage  :
 ```
 $Python resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
 ```
-Testing : 
+
+## Testing usage :
+
 ```
 $cd Bids-validator-web/
 $python3.5 -m unittest discover -v
 ```
-Details :
+## Details :
 
 In resources folder  :
 
