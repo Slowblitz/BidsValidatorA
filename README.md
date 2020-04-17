@@ -1,6 +1,13 @@
 
 # BidsValidatorA
-V2
+
+# Table of Contents
+1. [ General usage](#General-usage)
+2. [Specific usage](#Specific-usage)
+3. [Testing usage](#Testing-usage )
+4. [Details](#Details)
+
+
 ## General usage :
 ```
 usage: BidsValidatorA.py [-h] [-v] path
