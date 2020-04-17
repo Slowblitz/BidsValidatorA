@@ -1,3 +1,4 @@
+
 # BidsValidatorA
 V2
 
@@ -26,3 +27,20 @@ Testing :
 $cd Bids-validator-web/
 $python3.5 -m unittest discover -v
 ```
+Details :
+
+In resources folder  :
+
+ - file BidsValidatorA.py is the main file 
+ - file Error.py is the custom error exception file
+ - file BidsEngine.py is the file that verify  with the rules 
+
+In the Rules folder :
+
+ - data_rules.json regex for data rules
+ - date_rules.json regex for date rules
+ - subject_rules.json regex for subject rules
+ - source_rules.json  regex for source rules
+
+ 
+
