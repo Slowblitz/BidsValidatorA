@@ -27,9 +27,9 @@ install:
   - pip3 install -r requirements.txt
   
 script:
-        - cd scripts/GUID_CORE
+        - cd resources/
         - python3 -m pytest test/ || python -m pytest test/
-        - flake8 --max-complexity 12 .
+       # - flake8 --max-complexity 12 .
 
 notifications:
   email:
