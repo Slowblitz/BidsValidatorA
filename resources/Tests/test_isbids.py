@@ -11,7 +11,7 @@ class test_bids(unittest.TestCase):
     def setUp(self):
         pass
     '''testing bids folder'''
-
+'''
     def test_bids_dataset_1(self):
         names=list()
         test1="Tests/DataSets/ds001/Data"
@@ -52,7 +52,7 @@ class test_bids(unittest.TestCase):
         names = BVA.get_name_in_dir([dic_data], names)
         self.assertEqual(BVA.is_bids(names), False)
     
- 
+'''
 if __name__ == '__main__':
     unittest.main()
  
