@@ -6,7 +6,9 @@ import json
 import sys
 import re
 import argparse
-
+from Error import DataError,SourceError,DateError,SubError
+from bidsEngine import *
+dir_rules=os.path.join(os.path.dirname(__file__)) + "rules/"
 
 def path_hierarchy(path):
     """[make a json tree structure of the folder given in parameter]
@@ -55,50 +57,6 @@ def get_name_in_dir(list_dict, names):
 
     return names
 
-
-def verify_name(names):
-    """[Check names of folder that verify the rules bids]
-    
-    Arguments:
-        names {[list]} -- [Names founds in the Json structure ]
-    """
-
-    if (names[0] == "data" or names[0] == "Data"):
-        print("Folder Data found ")
-    else:
-        print("ERROR :  Data folder not found. Please check this name : " +
-              names[0])
-
-    if "sub-" or "Sub-" in str(names[2]):
-        print("Folder Name found : " + names[2])
-    else:
-        print("ERROR :  Folder name does not contain sub-."
-              ".Please check this name : " + names[2])
-
-    if re.search("^\d{6}_\d{3}_([a-zA-Z]{1})_([a-zA-Z]*)_([a-zA-Z]*)",
-                 names[3]):
-        print("Date format ok ")
-    else:
-        print(
-            "ERROR : Folder name does not follow the rules : \n /Date[yymmdd] _"
-            "numéro de session (expérience) _ espèce [m, o, r, s] _ "
-            "UFID animal(User friendly ID) _ commentaire . ")
-
-    if "source " or "Sources" in names:
-        print("Folder Sources Found . ")
-    else:
-        print("ERROR : Folder Sources not found .")
-
-    if "META-DATA" in names:
-        print("Folder META-DATA Found ")
-    else:
-        print("WARNING : Folder META-DATA not found .")
-    if "Row-data" in names:
-        print("Folder Row data Found ")
-    else:
-        print("WARNING : Folder Row data not found .")
-
-
 if __name__ == '__main__':
     # add argparse for verbose option
     parser = argparse.ArgumentParser()
@@ -116,23 +74,34 @@ if __name__ == '__main__':
 
         except IndexError:
             directory = "."
-        print(json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
-
-    try:
-        directory = args.path
-
-    except IndexError:
-        directory = "."
-
-    dic_data = json.loads(
+        names = []
+        dic_data = json.loads(
         json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
+        names = get_name_in_dir([dic_data], names)
+       
+        error=is_bids_verbose(names)
+      
+        if error == 1:
+            print("\n"+directory+" : Is Not validated by BidsValidatorA")
+        else:
+            print("\n"+directory+" : Is validated by BidsValidatorA")
+    else :  
+        try:
+            directory = args.path
 
-    names = []
-    names = get_name_in_dir([dic_data], names)
-    arr = []
-    print("\n")
-    print("list of folder : ")
+        except IndexError:
+            directory = "."
 
-    print(u" /".join(names))
-    print("\n")
-    verify_name(names)
+        dic_data = json.loads(
+            json.dumps(path_hierarchy(directory), indent=2, sort_keys=True))
+
+        names = []
+        names = get_name_in_dir([dic_data], names)
+        error_not_found=is_bids(names)
+        if not error_not_found:
+            print("\n"+directory+" : Is Not validated by BidsValidatorA")
+        else:
+            print("\n"+directory+" : Is validated by BidsValidatorA")
+
+			
+			

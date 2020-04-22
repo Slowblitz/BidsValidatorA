@@ -7,6 +7,7 @@ import sys
 import re
 import argparse
 
+dir_rules=os.path.join(os.path.dirname(__file__)) + "/rules/"
 
 def path_hierarchy(path):
     """[make a json tree structure of the folder given in parameter]
@@ -61,6 +62,8 @@ def verify_name(names):
     
     Arguments:
         names {[list]} -- [Names founds in the Json structure ]
+
+        a faire recusivement
     """
 
     if (names[0] == "data" or names[0] == "Data"):
@@ -141,6 +144,80 @@ def _verify_name(names):
     else:
        x.append("WARNING : Folder Row data not found .\n")
     return x
+
+
+def is_date(names):
+        ''' Check if file is data. '''
+        regexps = get_regular_expressions(dir_rules
+                    + 'date_rules.json')
+        conditions=[]
+        for word in names:
+            conditions.append([(re.compile(x).search(word) is not None) for x in regexps])
+        # print(flatten(conditions))  
+        return(any(flatten(conditions))) 
+
+def is_data(names):
+        ''' Check if file is data. '''
+        regexps = get_regular_expressions(dir_rules
+                    + 'data_rules.json')
+        conditions=[]
+        for word in names:
+             conditions.append([(re.compile(x).match(word) is not None) for x in regexps])
+        # print(flatten(conditions))
+        return (any(flatten(conditions)))
+def is_sub(names):
+        ''' Check if file is data. '''
+        regexps = get_regular_expressions(dir_rules
+                    + 'subject_rules.json')
+        conditions=[]
+        for word in names:
+             conditions.append([(re.compile(x).search(word) is not None) for x in regexps])
+        #  print(flatten(conditions))
+        return (any(flatten(conditions)))
+def is_source(names):
+        ''' Check if file is data. '''
+        regexps = get_regular_expressions(dir_rules
+                    + 'source_rules.json')
+        conditions=[]
+        for word in names:
+             conditions.append([(re.compile(x).search(word) is not None) for x in regexps])
+        #  print(flatten(conditions))
+        return (any(flatten(conditions)))
+        
+def get_regular_expressions(fileName):
+
+        regexps = []
+
+        with open(fileName, 'r') as f:
+            rules = json.load(f)
+
+        for key in list(rules.keys()):
+            rule = rules[key]
+
+            regexp = rule["regexp"]
+
+            if "tokens" in rule:
+                tokens = rule["tokens"]
+
+                for token in list(tokens):
+                    regexp = regexp.replace(token, "|".join(tokens[token]))
+
+            regexps.append(regexp)
+
+        return regexps
+
+def flatten(seq):
+    l = []
+    for elt in seq:
+        t = type(elt)
+        if t is tuple or t is list:
+            for elt2 in flatten(elt):
+                l.append(elt2)
+        else:
+            l.append(elt)
+    return l
+
+
 
 if __name__ == '__main__':
     # add argparse for verbose option
