@@ -28,7 +28,7 @@ install:
   
 script:
         - cd resources/
-        - python3 -m pytest test/ || python -m pytest test/
+        - python3 -m pytest -v || python -m pytest -v
        # - flake8 --max-complexity 12 .
 
 notifications:
