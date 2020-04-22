@@ -41,7 +41,7 @@ $Python resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
 ## Testing usage :
 
 ```
-$cd Bids-validator-web/
+$cd resources/
 $python3.5 -m unittest discover -v
 ```
 ## Details :
