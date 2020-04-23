@@ -11,7 +11,7 @@ Bids validator for animal  data structure
 2. [Specific usage](#Specific-usage)
 3. [Testing usage](#Testing-usage )
 4. [Details](#Details)
-
+# Use
 ### Clone
 
 - Clone this repo to your local machine using `https://github.com/Slowblitz/BidsValidatorA/tree/V2`
@@ -37,7 +37,7 @@ OR verbose usage  :
 ```
 $Python resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
 ```
-
+# Development 
 ## Testing usage :
 
 ```
