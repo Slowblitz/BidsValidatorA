@@ -31,7 +31,7 @@ optional arguments:
 ## Specific usage :
 
 ```
-$Python resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
+$Python3 resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
 ```
 <p align="center"><img src="Documents/vids/Exemple_no_verbose.gif" /></p>
 
@@ -41,7 +41,7 @@ $Python resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
 
 OR verbose usage  :
 ```
-$Python resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
+$Python3 resources/BidsValidatorA.py Tests/DataSets/FirstDataSet/Data
 ```
 
 <p align="center"><img src="Documents/vids/Exemple_w_verbose.gif" /></p>
