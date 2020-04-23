@@ -87,7 +87,7 @@ In the Rules folder :
 ---
  ## Support
 
-Reach out to me at one of the following places!
+Reach out to me at one :
 
 
 - Mail at <a href="jeremy.garcia@univ-amu.fr">jeremy.garcia@univ-amu.fr</a>
